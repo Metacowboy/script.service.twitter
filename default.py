@@ -1,26 +1,19 @@
-import urllib,urllib2,re,xbmc,xbmcaddon,os,sys
+import urllib,urllib2,re,xbmc,xbmcaddon,os,sys,shutil
 from xbmcgui import WindowXMLDialog
 from elementtree.SimpleXMLWriter import XMLWriter
 
-
+settings = xbmcaddon.Addon( id = 'script.service.twitter' )
+twitter_icon = os.path.join( settings.getAddonInfo( 'path' ), 'thumbnails', 'twitter-icon.png' )
 userdata = xbmc.translatePath('special://userdata/keymaps')
 twitter_file = os.path.join(userdata, 'twitter.xml')
+default_twitter_file = os.path.join( settings.getAddonInfo( 'path' ), 'default_keymap.xml' )
 
 if not os.path.exists(twitter_file):
-	w = XMLWriter(twitter_file, "utf-8")
-	doc = w.start("keymap")
-	w.start("global")
-	w.start("keyboard")
-        w.element("key", "addon.opensettings(script.service.twitter)", id=str('61524'))
-	w.end()
-	w.end()
-	w.end()
-	w.close(doc)
+	shutil.copy(default_twitter_file, twitter_file)
+	xbmc.sleep(1000)
 	xbmc.executebuiltin('Action(reloadkeymaps)')
 
 
-settings = xbmcaddon.Addon( id = 'script.service.twitter' )
-twitter_icon = os.path.join( settings.getAddonInfo( 'path' ), 'thumbnails', 'twitter-icon.png' )
 
 
 def _record_key():
