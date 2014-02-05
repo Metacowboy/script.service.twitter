@@ -1,9 +1,15 @@
-import urllib,urllib2,re,xbmc,xbmcaddon,os
+import urllib,urllib2,re,xbmc,xbmcaddon,os,sys
+from xbmcgui import WindowXMLDialog
+
+from elementtree.SimpleXMLWriter import XMLWriter
+userdata = xbmc.translatePath('special://userdata/keymaps')
+twitter_file = os.path.join(userdata, 'twitter.xml')
 
 
-settings = xbmcaddon.Addon( id = 'script.program.twitter' )
+
+
+settings = xbmcaddon.Addon( id = 'script.service.twitter' )
 twitter_icon = os.path.join( settings.getAddonInfo( 'path' ), 'thumbnails', 'twitter-icon.png' )
-
 
 
 
@@ -51,6 +57,47 @@ def MAIN(old_text=''):
 		
 	else:
 		xbmc.sleep(100)
+		MAIN()
 	
+	
+
+def _record_key():
+    	dialog = KeyListener()
+    	dialog.doModal()
+    	key = dialog.key
+    	del dialog
+	w = XMLWriter(twitter_file, "utf-8")
+	doc = w.start("keymap")
+	w.start("global")
+	w.start("keyboard")
+        w.element("key", "addon.opensettings(script.service.twitter)", id=str(key))
+	w.end()
+	w.end()
+	w.end()
+	w.close(doc)
+
+
+class KeyListener(WindowXMLDialog):
+  def __new__(cls):
+    return super(KeyListener, cls).__new__(cls, "DialogKaiToast.xml", "")
+  
+  def onInit(self):
+    try:
+      self.getControl(401).addLabel('Twitter Settings')
+      self.getControl(402).addLabel('Press the key you want to assign now')
+    except:
+      self.getControl(401).setLabel('Twitter Settings')
+      self.getControl(402).setLabel('Press the key you want to assign now')
+  
+  def onAction(self, action):
+    self.key = action.getButtonCode()
+    self.close()
+
+try:
+	if sys.argv[1]:
+		_record_key() 
+		xbmc.sleep(1000)
+		xbmc.executebuiltin('Action(reloadkeymaps)')
+except:
 	MAIN()
-MAIN()
+
