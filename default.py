@@ -103,6 +103,7 @@ while (not xbmc.abortRequested):
 				text = re.sub("(<.*?>)", "", text)
 				text = text.replace("&#39;","'")
 				text = text.replace("&nbsp;", " ")
+				text = text.replace("&#10;", " ")
 				text = text.replace('&quot;', '"')
 				text = text.replace('&amp;', '&')
 				text = text.replace('&lt;', '<')
