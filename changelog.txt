@@ -4,3 +4,5 @@ Version 0.1.0
 -Added settings to control feeds.
 Version 0.2.0
 -Added button, that can be set, to open the twitter dialog.
+Version 0.3.0
+-Minor bug fixes
