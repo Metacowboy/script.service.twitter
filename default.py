@@ -28,6 +28,11 @@ def _record_key():
         w.element("key", "addon.opensettings(script.service.twitter)", id=str(key))
 	w.end()
 	w.end()
+	w.start("fullscreenvideo")
+	w.start("keyboard")
+	w.element("key", "addon.opensettings(script.service.twitter)", id=str(key))
+	w.end()
+	w.end()
 	w.end()
 	w.close(doc)
 	

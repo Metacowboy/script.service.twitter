@@ -1,1 +1,1 @@
-<keymap><global><keyboard><key id="61524">addon.opensettings(script.service.twitter)</key></keyboard></global></keymap>
+<keymap><global><keyboard><key id="61524">addon.opensettings(script.service.twitter)</key></keyboard></global><fullscreenvideo><keyboard><key id="61524">addon.opensettings(script.service.twitter)</key></keyboard></fullscreenvideo></keymap>
