@@ -1,3 +1,4 @@
+import re
 def lang(language):
 	if language == 'All Languages':
 		language = 'all'
@@ -101,4 +102,22 @@ def lang(language):
 	if language == 'Vietnamese' :
 		language = 'vi'
 		return language
+
+def name(dispname):
+	dispname=dispname.replace("&#39;","'")
+	dispname=dispname.replace("\\","%")
+	dispname=re.sub("(%x..)","", dispname)
+	return dispname
+
+def text(text):
+	text = re.sub("(<.*?>)", "", text)
+	text = text.replace("&#39;","'")
+	text = text.replace("&nbsp;", " ")
+	text = text.replace("&#10;", " ")
+	text = text.replace('&quot;', '"')
+	text = text.replace('&amp;', '&')
+	text = text.replace('&lt;', '<')
+	text = text.replace('&gt;', '>')
+	return text
+	
 
