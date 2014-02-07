@@ -119,5 +119,11 @@ def text(text):
 	text = text.replace('&lt;', '<')
 	text = text.replace('&gt;', '>')
 	return text
-	
+
+def searchstr(search_string):
+	search_string = search_string.replace(' or ','%20OR%20')
+	search_string = search_string.replace('#','%23')
+	search_string = search_string.replace('@','%40')
+	search_string = search_string.replace(' ','%20')
+	return search_string
 

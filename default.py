@@ -83,9 +83,8 @@ while (not xbmc.abortRequested):
 			language = settings.getSetting('language')
 			language = re.sub("( \(.*?\))", "", language)
 			language = word_resolver.lang(language)
-			search_string_original = settings.getSetting("search_string")
-			search_string = search_string_original.replace('#','%23')
-			search_string = search_string.replace(' ','%20')
+			search_string = settings.getSetting("search_string")
+			search_string = word_resolver.searchstr(search_string)
 			if language != 'all':
 				search_string = search_string + '%20lang%3A'+language
 			xbmc.log('Twitter Search '+search_string)
