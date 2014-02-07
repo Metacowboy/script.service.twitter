@@ -1,12 +1,14 @@
 import urllib,urllib2,re,xbmc,xbmcaddon,os,sys,shutil
 from xbmcgui import WindowXMLDialog
 from elementtree.SimpleXMLWriter import XMLWriter
+from lang_resolver import lang_resolver
 
 settings = xbmcaddon.Addon( id = 'script.service.twitter' )
 twitter_icon = os.path.join( settings.getAddonInfo( 'path' ), 'thumbnails', 'twitter-icon.png' )
 userdata = xbmc.translatePath('special://userdata/keymaps')
 twitter_file = os.path.join(userdata, 'twitter.xml')
 default_twitter_file = os.path.join( settings.getAddonInfo( 'path' ), 'default_keymap.xml' )
+
 
 if not os.path.exists(twitter_file):
 	shutil.copy(default_twitter_file, twitter_file)
@@ -78,9 +80,15 @@ while (not xbmc.abortRequested):
 				old_text = old_text
 			except:
 				old_text = ''
+			language = settings.getSetting('language')
+			language = re.sub("( \(.*?\))", "", language)
+			language = lang_resolver(language)
 			search_string_original = settings.getSetting("search_string")
 			search_string = search_string_original.replace('#','%23')
 			search_string = search_string.replace(' ','%20')
+			if language != 'all':
+				search_string = search_string + '%20lang%3A'+language
+			xbmc.log('Twitter Search '+search_string)
 			display_time = settings.getSetting("display_time")
 			display_time = str(display_time)+'000'
 			display_time = int(display_time)

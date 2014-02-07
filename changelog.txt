@@ -6,3 +6,5 @@ Version 0.2.0
 -Added button, that can be set, to open the twitter dialog.
 Version 0.3.0
 -Minor bug fixes
+Version 0.4.0
+-Added Languages

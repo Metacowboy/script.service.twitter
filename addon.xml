@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
  id="script.service.twitter"
-    version="0.3.0"
+    version="0.4.0"
     name="Twitter Feeds"
     provider-name="Romans I XVI"
     >
