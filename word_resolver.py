@@ -1,4 +1,4 @@
-def lang_resolver(language):
+def lang(language):
 	if language == 'All Languages':
 		language = 'all'
 		return language
@@ -101,3 +101,4 @@ def lang_resolver(language):
 	if language == 'Vietnamese' :
 		language = 'vi'
 		return language
+

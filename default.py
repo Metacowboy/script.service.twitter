@@ -1,7 +1,7 @@
 import urllib,urllib2,re,xbmc,xbmcaddon,os,sys,shutil
 from xbmcgui import WindowXMLDialog
 from elementtree.SimpleXMLWriter import XMLWriter
-from lang_resolver import lang_resolver
+import word_resolver
 
 settings = xbmcaddon.Addon( id = 'script.service.twitter' )
 twitter_icon = os.path.join( settings.getAddonInfo( 'path' ), 'thumbnails', 'twitter-icon.png' )
@@ -82,7 +82,7 @@ while (not xbmc.abortRequested):
 				old_text = ''
 			language = settings.getSetting('language')
 			language = re.sub("( \(.*?\))", "", language)
-			language = lang_resolver(language)
+			language = word_resolver.lang(language)
 			search_string_original = settings.getSetting("search_string")
 			search_string = search_string_original.replace('#','%23')
 			search_string = search_string.replace(' ','%20')
@@ -104,6 +104,9 @@ while (not xbmc.abortRequested):
 				name=re.compile('data-screen-name="(.+?)" data-name="(.+?)"').findall(link)
 				name=str(name[0])
 				name=re.compile("'(.+?)'").findall(name)
+				dispname=str(name[1])
+				dispname=dispname.replace("&#39;","'")
+				dispname=dispname.replace('\\xe2','')
 				text=re.compile('<p class="js-tweet-text tweet-text">(.+?)</p>').findall(link)
 				text=text[0]
 				text = re.sub("(<.*?>)", "", text)
@@ -115,7 +118,7 @@ while (not xbmc.abortRequested):
 				text = text.replace('&lt;', '<')
 				text = text.replace('&gt;', '>')
 				if old_text != text:
-					xbmc.executebuiltin('XBMC.Notification("%s","%s",%d,"%s")' % (str(name[1])+'  @'+str(name[0]), text, display_time, twitter_icon))
+					xbmc.executebuiltin('XBMC.Notification("%s","%s",%d,"%s")' % (dispname+'  @'+str(name[0]), text, display_time, twitter_icon))
 					xbmc.sleep(wait_time)
 					old_text = text
 				else:
