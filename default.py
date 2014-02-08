@@ -1,6 +1,5 @@
-import urllib,urllib2,re,xbmc,xbmcaddon,os,sys,shutil
+import urllib,urllib2,re,xbmc,xbmcaddon,xbmcgui,os,sys,shutil
 from elementtree.SimpleXMLWriter import XMLWriter
-from xbmcgui import WindowXMLDialog
 import word_resolver
 
 settings = xbmcaddon.Addon( id = 'script.service.twitter' )
@@ -37,7 +36,7 @@ def _record_key():
 	w.end()
 	w.close(doc)
 
-class KeyListener(WindowXMLDialog):
+class KeyListener(xbmcgui.WindowXMLDialog):
   def __new__(cls):
     return super(KeyListener, cls).__new__(cls, "DialogKaiToast.xml", "")
   
