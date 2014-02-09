@@ -1,6 +1,6 @@
 [COLOR blue][B]Welcome to the Twitter Feeds addon.[/B][/COLOR]
 
-These days many television programs have an associated twitter account "@" or topic hashtag "#". Some programs even display the tweets of viewers in real time, thus the inspiration for this addon. This addon enables you to follow the conversation associated with any show you are watching, or for that matter any other twitter conversation that is occuring.
+These days many television programs have an associated twitter account "@" or topic hashtag "#". Some programs even display the tweets of viewers in real time, thus the inspiration for this addon. This addon enables you to follow the conversation associated with any show you are watching, or for that matter any other twitter conversation that is occurring.
 
 [COLOR blue][B]Usage[/B][/COLOR]
 
