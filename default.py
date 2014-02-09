@@ -146,7 +146,7 @@ while (not xbmc.abortRequested):
 				text=text[0]
 				text = word_resolver.text(text)
 				if old_text != text:
-					xbmc.executebuiltin('XBMC.Notification("%s","%s",%d,"%s")' % (dispname+'  @'+str(name[0]), text, display_time, twitter_icon))
+					xbmc.executebuiltin('XBMC.Notification("%s","%s",%d,"%s", False)' % (dispname+'  @'+str(name[0]), text, display_time, twitter_icon))
 					xbmc.sleep(wait_time)
 					old_text = text
 				else:
