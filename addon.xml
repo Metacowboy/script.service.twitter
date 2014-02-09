@@ -17,7 +17,7 @@
         <description>Plugin that displays twitter feeds</description>
         <platform>all</platform>
 	<license>GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007</license>
-	<forum>http://forum.xbmc.org/showthread.php?tid=181288</forum>
+	<forum>None</forum>
 	<source>https://github.com/asojka09/script.service.twitter</source>
 	<email>austinsojka@hotmail.com</email>
     </extension>
