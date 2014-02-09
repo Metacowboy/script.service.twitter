@@ -69,11 +69,11 @@ class TextBox:
 
     def setControls(self):
         # set heading
-        heading = "Twitter Feeds"
+        heading = "Twitter Feeds by Romans I XVI"
         self.win.getControl(self.CONTROL_LABEL).setLabel(heading)
         # set text
         root = settings.getAddonInfo( 'path' )
-        faq_path = os.path.join(root, 'help.faq')
+        faq_path = os.path.join(root, 'instructions.txt')
         f = open(faq_path)
         text = f.read()
         self.win.getControl(self.CONTROL_TEXTBOX).setText(text)
