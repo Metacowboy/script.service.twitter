@@ -35,7 +35,7 @@ The twitter search function, which is what this addon hooks in to, is very power
 [COLOR blue]Seconds To Display Tweet:[/COLOR] This is the number of seconds the notification that displays the tweet will stay active.
 [COLOR blue]Seconds To Wait Before Fetching New Tweet:[/COLOR] This is the number of seconds XBMC will wait before searching to see if a new tweet is available, if this is set lower than "Seconds To Display Tweet" and a tweet is found the new tweet will replace the previous tweet.
 [COLOR blue]Tweet Language:[/COLOR] Use this to only display tweets that are written in a specific language. Note: some languages require an alternative font, such as Arial.
-[COLOR blue]Set Twitter Key:[/COLOR] Use this to set the key to open the Twitter Feeds dialog. (Defaut = t)
+[COLOR blue]Set Twitter Key:[/COLOR] Use this to set the key to open the Twitter Feeds dialog. (Defaut "t")
 
 
 
