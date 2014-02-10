@@ -1,6 +1,9 @@
 import urllib,urllib2,re,xbmc,xbmcaddon,xbmcgui,os,sys,shutil
-from elementtree.SimpleXMLWriter import XMLWriter
 import word_resolver
+try:
+	from elementtree.SimpleXMLWriter import XMLWriter
+except:
+	pass
 
 settings = xbmcaddon.Addon( id = 'script.service.twitter' )
 twitter_icon = os.path.join( settings.getAddonInfo( 'path' ), 'thumbnails', 'twitter-icon.png' )
