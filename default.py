@@ -127,7 +127,6 @@ while (not xbmc.abortRequested):
 			search_string = word_resolver.searchstr(search_string)
 			if language != 'all':
 				search_string = search_string + '%20lang%3A'+language
-			xbmc.log('Twitter Search '+search_string)
 			display_time = settings.getSetting("display_time")
 			display_time = str(display_time)+'000'
 			display_time = int(display_time)
@@ -139,28 +138,29 @@ while (not xbmc.abortRequested):
 			response = urllib2.urlopen(req)
 			link=response.read()
 			response.close()
-			#try:
-			name=re.compile('data-screen-name="(.+?)" data-name="(.+?)"').findall(link)
-			name=str(name[0])
-			name=re.compile("'(.+?)'").findall(name)
-			dispname=str(name[1])
-			dispname=word_resolver.name(dispname)
-			mistweet = re.compile('data-promoted="(.+?)"').findall(link)
-			mistweet2 = re.compile('data-relevance-type="(.+?)"').findall(link)
-			test_tweet = len(mistweet) + len(mistweet2)
-			xbmc.log('Number of tweets to skip = '+str(test_tweet))
-			text=re.compile('<p class="js-tweet-text tweet-text">(.+?)</p>').findall(link)
-			text=text[test_tweet]
-			text = word_resolver.text(text)
-			if old_text != text:
-				xbmc.executebuiltin('XBMC.Notification("%s","%s",%d,"%s")' % (dispname+'  @'+str(name[0]), text, display_time, twitter_icon))
-				xbmc.sleep(wait_time)
-				old_text = text
-			else:
-				xbmc.sleep(500)
-			#except:
-			#	xbmc.executebuiltin('XBMC.Notification("Search Error", "No Results")')
-			#	xbmc.sleep(500)			
+			try:
+				name=re.compile('data-screen-name="(.+?)" data-name="(.+?)"').findall(link)
+				name=str(name[0])
+				name=re.compile("'(.+?)'").findall(name)
+				dispname=str(name[1])
+				dispname=word_resolver.name(dispname)
+				mistweet = re.compile('data-promoted="(.+?)"').findall(link)
+				mistweet2 = re.compile('data-relevance-type="(.+?)"').findall(link)
+				test_tweet = len(mistweet) + len(mistweet2)
+				xbmc.log('Twitter URL = '+'http://www.twitter.com/search?q='+search_string+'&f=realtime'+'   Number of tweets to skip = '+str(test_tweet))
+				text=re.compile('<p class="js-tweet-text tweet-text">(.+?)</p>').findall(link)
+				text=text[test_tweet]
+				text = word_resolver.text(text)
+				if old_text != text:
+					xbmc.executebuiltin('XBMC.Notification("%s","%s",%d,"%s")' % (dispname+'  @'+str(name[0]), text, display_time, twitter_icon))
+					xbmc.sleep(wait_time)
+					old_text = text
+				else:
+					xbmc.sleep(500)
+			except:
+				xbmc.log('No Twitter Results, URL = '+'http://www.twitter.com/search?q='+search_string+'&f=realtime')
+				xbmc.executebuiltin('XBMC.Notification("Search Error", "No Results")')
+				xbmc.sleep(500)			
 		
 		else:
 			xbmc.sleep(1000)
