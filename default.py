@@ -139,20 +139,21 @@ while (not xbmc.abortRequested):
 			link=response.read()
 			response.close()
 			try:
+				mistweet = re.compile('(data-promoted)').findall(link)
+				mistweet2 = re.compile('(data-relevance-type)').findall(link)
+				test_tweet = len(mistweet) + len(mistweet2)
 				name=re.compile('data-screen-name="(.+?)" data-name="(.+?)"').findall(link)
-				name=str(name[0])
+				name=str(name[test_tweet])
 				name=re.compile("'(.+?)'").findall(name)
+				username=str(name[0])
 				dispname=str(name[1])
 				dispname=word_resolver.name(dispname)
-				mistweet = re.compile('data-promoted="(.+?)"').findall(link)
-				mistweet2 = re.compile('data-relevance-type="(.+?)"').findall(link)
-				test_tweet = len(mistweet) + len(mistweet2)
 				xbmc.log('Twitter URL = '+'http://www.twitter.com/search?q='+search_string+'&f=realtime'+'   Number of tweets to skip = '+str(test_tweet))
 				text=re.compile('<p class="js-tweet-text tweet-text">(.+?)</p>').findall(link)
 				text=text[test_tweet]
 				text = word_resolver.text(text)
 				if old_text != text:
-					xbmc.executebuiltin('XBMC.Notification("%s","%s",%d,"%s")' % (dispname+'  @'+str(name[0]), text, display_time, twitter_icon))
+					xbmc.executebuiltin('XBMC.Notification("%s","%s",%d,"%s")' % (dispname+'  @'+username, text, display_time, twitter_icon))
 					xbmc.sleep(wait_time)
 					old_text = text
 				else:
