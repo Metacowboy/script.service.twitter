@@ -99,8 +99,8 @@ except:
 if (not settings.getSetting("firstrun")):
 	dialog = xbmcgui.Dialog()
 	dialog.ok('Twitter Feeds','I will now open your twitter settings.','You can access these settings at any time using', 'the twitter hotkey. (Default "t")')
+	settings.setSetting("firstrun", "1")
 	settings.openSettings()
-        settings.setSetting("firstrun", "1")
 
 
 while (not xbmc.abortRequested):
