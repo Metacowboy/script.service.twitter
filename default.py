@@ -6,7 +6,7 @@ except:
 	pass
 
 settings = xbmcaddon.Addon( id = 'script.service.twitter' )
-twitter_icon = os.path.join( settings.getAddonInfo( 'path' ), 'thumbnails', 'twitter-icon.png' )
+twitter_icon = os.path.join( settings.getAddonInfo( 'path' ), 'icon.png' )
 userdata = xbmc.translatePath('special://userdata/keymaps')
 twitter_file = os.path.join(userdata, 'twitter.xml')
 default_twitter_file = os.path.join( settings.getAddonInfo( 'path' ), 'default_keymap.xml' )
