@@ -1,4 +1,4 @@
-import urllib,urllib2,re,xbmc,xbmcaddon,xbmcgui,os,sys,shutil
+import urllib,urllib2,re,xbmc,xbmcaddon,xbmcgui,os,sys
 import word_resolver
 try:
 	from elementtree.SimpleXMLWriter import XMLWriter
@@ -6,15 +6,10 @@ except:
 	pass
 
 settings = xbmcaddon.Addon( id = 'script.service.twitter' )
+translation = settings.getLocalizedString
 twitter_icon = os.path.join( settings.getAddonInfo( 'path' ), 'icon.png' )
 userdata = xbmc.translatePath('special://userdata/keymaps')
 twitter_file = os.path.join(userdata, 'twitter.xml')
-default_twitter_file = os.path.join( settings.getAddonInfo( 'path' ), 'default_keymap.xml' )
-
-if not os.path.exists(twitter_file):
-	shutil.copy(default_twitter_file, twitter_file)
-	xbmc.sleep(1000)
-	xbmc.executebuiltin('Action(reloadkeymaps)')
 
 
 
@@ -45,11 +40,11 @@ class KeyListener(xbmcgui.WindowXMLDialog):
   
   def onInit(self):
     try:
-      self.getControl(401).addLabel('Twitter Settings')
-      self.getControl(402).addLabel('Press the key you want to assign now')
+      self.getControl(401).addLabel(translation(30008))
+      self.getControl(402).addLabel(translation(30009))
     except:
-      self.getControl(401).setLabel('Twitter Settings')
-      self.getControl(402).setLabel('Press the key you want to assign now')
+      self.getControl(401).setLabel(translation(30008))
+      self.getControl(402).setLabel(translation(30009))
   
   def onAction(self, action):
     self.key = action.getButtonCode()
@@ -72,7 +67,7 @@ class TextBox:
 
     def setControls(self):
         # set heading
-        heading = "Twitter Feeds by Romans I XVI"
+        heading = translation(30011)
         self.win.getControl(self.CONTROL_LABEL).setLabel(heading)
         # set text
         root = settings.getAddonInfo( 'path' )
@@ -93,12 +88,19 @@ except:
 try:
 	if sys.argv[1] == 'display_file':
 		TextBox()
+		sys.exit(0)
 except:
 	pass
 
 if (not settings.getSetting("firstrun")):
 	dialog = xbmcgui.Dialog()
-	dialog.ok('Twitter Feeds','I will now open your twitter settings.','You can access these settings at any time using', 'the twitter hotkey. (Default "t")')
+	tosetkey = dialog.yesno(translation(30011),translation(30012), translation(30013), translation(30014))
+	if tosetkey == True:
+		_record_key() 
+		xbmc.sleep(1000)
+		xbmc.executebuiltin('Action(reloadkeymaps)')
+	else:
+		dialog.ok(translation(30011),translation(30015),translation(30016))
 	settings.setSetting("firstrun", "1")
 	settings.openSettings()
 
@@ -160,7 +162,7 @@ while (not xbmc.abortRequested):
 					xbmc.sleep(500)
 			except:
 				xbmc.log('No Twitter Results, URL = '+'http://www.twitter.com/search?q='+search_string+'&f=realtime')
-				xbmc.executebuiltin('XBMC.Notification("Search Error", "No Results")')
+				xbmc.executebuiltin('XBMC.Notification("%s", "%s")' % (translation(30017),translation(30018)))
 				xbmc.sleep(500)			
 		
 		else:
