@@ -3,7 +3,7 @@ import word_resolver
 try:
 	from elementtree.SimpleXMLWriter import XMLWriter
 except:
-	pass
+	from dummyelementtree.SimpleXMLWriter import XMLWriter
 
 settings = xbmcaddon.Addon( id = 'script.service.twitter' )
 translation = settings.getLocalizedString
