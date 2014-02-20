@@ -7,6 +7,7 @@
     >
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
+	<import addon="script.module.elementtree" version="1.2.8"/>
     </requires>
     <extension point="xbmc.service"
              library="default.py" start="startup">
