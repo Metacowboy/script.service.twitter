@@ -156,11 +156,11 @@ while (not xbmc.abortRequested):
 					xbmc.sleep(wait_time)
 					old_text = text
 				else:
-					xbmc.sleep(500)
+					xbmc.sleep(6000)
 			except:
 				xbmc.log('No Twitter Results, URL = '+'http://www.twitter.com/search?q='+search_string+'&f=realtime')
 				xbmc.executebuiltin('XBMC.Notification("%s", "%s")' % (translation(30017),translation(30018)))
-				xbmc.sleep(500)			
+				xbmc.sleep(6000)			
 		
 		else:
 			xbmc.sleep(1000)
